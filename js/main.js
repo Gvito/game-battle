@@ -6,6 +6,7 @@ function Guerrier(nom, attaque, defense, sante) {
   this.sante = sante,
 
   this.attack = function(test) {
+    document.getElementById("attackWarrior").innerHTML = "Le guerrier " + this.nom + " a attaqué le guerrier " + test.nom + " de " + this.attaque;
     test.sante = test.sante - this.attaque;
   }
 };
@@ -19,7 +20,14 @@ function Magicien(nom, attaque, defense, sante, mana) {
   this.mana = mana,
 
   this.heal = function() {
-
+    if (this.mana > 9) {
+      document.getElementById("useHeal").innerHTML = "Le magicien utilise soin !"
+      this.mana = this.mana - 10,
+      this.sante = this.sante + 10
+    }
+    else {
+      document.getElementById("errorHeal").innerHTML = "Le magicien n'a pu assez de mana, impossible de récuperer de la santé !";
+    }
   }
 };
 
@@ -36,12 +44,24 @@ document.getElementById("viewGuerrier2").innerHTML = "Nom: " + guerrier2.nom + "
 
 // the warrior 1 attack warrior 2
 guerrier1.attack(guerrier2);
+document.getElementById("viewNextGuerrier").innerHTML = "Nom: " + guerrier2.nom + "<br> Santé: " + guerrier2.sante;
 // the warrior 2 attack warrior 1
 guerrier2.attack(guerrier1);
+document.getElementById("viewNextGuerrier2").innerHTML = "Nom: " + guerrier1.nom + "<br> Santé: " + guerrier1.sante;
 
-// show the warrior stats after the battle
-document.getElementById("viewNextGuerrier").innerHTML = "Nom: " + guerrier1.nom + "<br> Santé: " + guerrier1.sante;
-document.getElementById("viewNextGuerrier2").innerHTML = "Nom: " + guerrier2.nom + "<br> Santé: " + guerrier2.sante;
+///////////////////////////////////////////
 
 // show the magicien stats
 document.getElementById("viewMagicien").innerHTML = "Nom: " + magicien.nom + "<br> Attaque: " + magicien.attaque + "<br> Défense: " + magicien.defense + "<br> Santé: " + magicien.sante + "<br> Mana: " + magicien.mana;
+
+// use healing
+magicien.heal();
+// show the magicien stats after heal
+document.getElementById("viewMagicien2").innerHTML = "Nom: " + magicien.nom + "<br> Santé: " + magicien.sante + "<br> Mana: " + magicien.mana;
+
+
+magicien.mana = 5;
+// use healing
+magicien.heal();
+// show the magicien stats after heal (and with 5 mana)
+document.getElementById("viewMagicien3").innerHTML = "Nom: " + magicien.nom + "<br> Santé: " + magicien.sante + "<br> Mana: " + magicien.mana;
